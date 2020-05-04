@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Security.WebAPI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{96E5303B-F65A-4908-BBAD-E23CE22CA24C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Infrastructure.Security.Google", "SharpLog.Infrastructure.Security.Google\SharpLog.Infrastructure.Security.Google.csproj", "{A00B2D88-F832-4980-82A9-9D80C9D3C548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Security.Infrastructure.Google", "SharpLog.Infrastructure.Security.Google\SharpLog.Security.Infrastructure.Google.csproj", "{A00B2D88-F832-4980-82A9-9D80C9D3C548}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{A78B0D00-43E6-4811-A98B-6317BD992672}"
 EndProject
@@ -21,13 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Google", "Google", "{9313BB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{756DE59B-72E0-4977-9642-204057DFAA99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Framework.WebApi", "SharpLog.Framework.WebApi\SharpLog.Framework.WebApi.csproj", "{ACA290F0-849C-4D47-857E-A6C42C738090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Framework.WebAPI", "SharpLog.Framework.WebApi\SharpLog.Framework.WebAPI.csproj", "{ACA290F0-849C-4D47-857E-A6C42C738090}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{324A7698-2D7A-4C0D-B81D-EB56506E81F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Security.Core", "SharpLog.Security.Core\SharpLog.Security.Core.csproj", "{5E1E2F47-3E97-46C7-A507-811F4A6681C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Security.Core", "SharpLog.Security.Core\SharpLog.Security.Core.csproj", "{5E1E2F47-3E97-46C7-A507-811F4A6681C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Security.Infrastructure", "SharpLog.Security.Infrastructure\SharpLog.Security.Infrastructure.csproj", "{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Security.Infrastructure", "SharpLog.Security.Infrastructure\SharpLog.Security.Infrastructure.csproj", "{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

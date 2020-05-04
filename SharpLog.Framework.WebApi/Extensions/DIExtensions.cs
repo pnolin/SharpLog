@@ -4,7 +4,7 @@ using SharpLog.Core.Interfaces;
 using SharpLog.Core.Models.Settings;
 using SharpLog.Core.Services;
 
-namespace SharpLog.Framework.WebApi.Extensions
+namespace SharpLog.Framework.WebAPI.Extensions
 {
     public static class DIExtensions
     {
