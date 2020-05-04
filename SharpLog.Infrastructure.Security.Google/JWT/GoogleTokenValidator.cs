@@ -31,10 +31,9 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
 
         public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
         {
-            validatedToken = null;
-            var x = new GoogleJsonWebSignature.ValidationSettings();
-            x.Audience = new List<string>() { _settingsService.GoogleApiCrendentials.ClientId };
-            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, x).Result;
+            var validationSettings = new GoogleJsonWebSignature.ValidationSettings();
+            validationSettings.Audience = new List<string>() { _settingsService.GoogleApiCrendentials.ClientId! };
+            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, validationSettings).Result;
 
             var claims = new List<Claim>
                 {
@@ -49,6 +48,7 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
 
             try
             {
+                validatedToken = null;
                 var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationTypes.Google));
                 return principle;
             }

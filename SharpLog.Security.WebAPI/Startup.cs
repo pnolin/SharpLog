@@ -9,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 using SharpLog.Core.Interfaces;
 using SharpLog.Infrastructure.Security.Google.JWT;
 using SharpLog.Security.WebAPI.Extensions;
-using System.Reflection;
 
 namespace SharpLog.Security.WebAPI
 {
@@ -49,7 +48,7 @@ namespace SharpLog.Security.WebAPI
                     .Build();
             });
 
-            services.AddAutoMapper(typeof(MappingProfiles.MappingProfiles).GetTypeInfo().Assembly);
+            services.AddAutoMapper(typeof(MappingProfiles.MappingProfiles).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
