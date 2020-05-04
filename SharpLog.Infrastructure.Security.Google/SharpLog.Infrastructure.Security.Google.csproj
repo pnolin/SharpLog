@@ -14,5 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharpLog.Core\SharpLog.Core.csproj" />
+    <ProjectReference Include="..\SharpLog.Security.Core\SharpLog.Security.Core.csproj" />
   </ItemGroup>
 </Project>

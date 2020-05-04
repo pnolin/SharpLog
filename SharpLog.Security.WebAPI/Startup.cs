@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using SharpLog.Core.Interfaces;
 using SharpLog.Infrastructure.Security.Google.JWT;
 using SharpLog.Security.WebAPI.Extensions;
+using System.Reflection;
 
 namespace SharpLog.Security.WebAPI
 {
@@ -46,6 +48,8 @@ namespace SharpLog.Security.WebAPI
                     .RequireAuthenticatedUser()
                     .Build();
             });
+
+            services.AddAutoMapper(typeof(MappingProfiles.MappingProfiles).GetTypeInfo().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

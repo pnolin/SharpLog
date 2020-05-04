@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.IdentityModel.Tokens;
 using SharpLog.Core.Interfaces;
+using SharpLog.Security.Core.Models.Constants;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -48,7 +49,7 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
 
             try
             {
-                var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, "google"));
+                var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationTypes.Google));
                 return principle;
             }
             catch (Exception e)

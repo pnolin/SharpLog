@@ -23,6 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{75
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Framework.WebApi", "SharpLog.Framework.WebApi\SharpLog.Framework.WebApi.csproj", "{ACA290F0-849C-4D47-857E-A6C42C738090}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{324A7698-2D7A-4C0D-B81D-EB56506E81F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Security.Core", "SharpLog.Security.Core\SharpLog.Security.Core.csproj", "{5E1E2F47-3E97-46C7-A507-811F4A6681C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Security.Infrastructure", "SharpLog.Security.Infrastructure\SharpLog.Security.Infrastructure.csproj", "{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +51,14 @@ Global
 		{ACA290F0-849C-4D47-857E-A6C42C738090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA290F0-849C-4D47-857E-A6C42C738090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACA290F0-849C-4D47-857E-A6C42C738090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1E2F47-3E97-46C7-A507-811F4A6681C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1E2F47-3E97-46C7-A507-811F4A6681C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1E2F47-3E97-46C7-A507-811F4A6681C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1E2F47-3E97-46C7-A507-811F4A6681C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AD9BC1-0963-49C1-9FA8-7511E34C77E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +71,9 @@ Global
 		{9313BB6E-B605-4650-9939-E2571D7ECD5D} = {A78B0D00-43E6-4811-A98B-6317BD992672}
 		{756DE59B-72E0-4977-9642-204057DFAA99} = {7E55239B-76FC-47C2-B262-F646A915602E}
 		{ACA290F0-849C-4D47-857E-A6C42C738090} = {7E55239B-76FC-47C2-B262-F646A915602E}
+		{324A7698-2D7A-4C0D-B81D-EB56506E81F1} = {6DD6CCD2-242F-4A0A-93A8-F91DE5BC0537}
+		{5E1E2F47-3E97-46C7-A507-811F4A6681C6} = {324A7698-2D7A-4C0D-B81D-EB56506E81F1}
+		{51AD9BC1-0963-49C1-9FA8-7511E34C77E7} = {A78B0D00-43E6-4811-A98B-6317BD992672}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7965C9E2-388F-40B0-B2DB-432AA135321D}

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SharpLog.Security.Core.Interfaces;
+using System.Threading.Tasks;
 
 namespace SharpLog.Security.WebAPI.Controllers
 {
@@ -8,12 +11,25 @@ namespace SharpLog.Security.WebAPI.Controllers
     [Authorize]
     public class SecurityController : ControllerBase
     {
-        // GET: api/<controller>
+        private readonly ISecurityService _securityService;
+        private readonly IMapper _mapper;
+
+        public SecurityController(
+            ISecurityService securityService,
+            IMapper mapper
+        )
+        {
+            _securityService = securityService;
+            _mapper = mapper;
+        }
+
         [HttpGet]
         [Route("login/")]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-            return NoContent();
+            var loggedInUser = await _securityService.GetLoggedInUser();
+
+            return Ok(loggedInUser);
         }
     }
 }
