@@ -1,6 +1,8 @@
-﻿namespace SharpLog.Users.WebAPI.Models
+﻿using SharpLog.Framework.WebAPI.Models;
+
+namespace SharpLog.Users.WebAPI.Models
 {
-    public class UserProfileViewModel
+    public class UserProfileViewModel : BaseViewModel
     {
         public string? EmailAddress { get; set; }
     }

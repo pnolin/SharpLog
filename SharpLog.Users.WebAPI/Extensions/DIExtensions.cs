@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using SharpLog.Core.Interfaces.HandlerPipeline;
 using SharpLog.Framework.WebAPI.Extensions;
+using SharpLog.Users.Core.Interfaces;
 using SharpLog.Users.Core.Requests;
+using SharpLog.Users.Core.Services;
 using System.Reflection;
 
 namespace SharpLog.Users.WebAPI.Extensions
@@ -19,6 +21,8 @@ namespace SharpLog.Users.WebAPI.Extensions
             IConfiguration configuration)
         {
             services.RegisterFrameworkWebAPIServices();
+
+            services.AddScoped<IUserProfileService, UserProfileService>();
 
             services.RegisterAllTypesFromGeneric(typeof(IRequestHandler<,>), _assembliesToScanForDI, true);
         }

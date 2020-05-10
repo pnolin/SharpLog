@@ -8,7 +8,8 @@ namespace SharpLog.Users.WebAPI.MappingProfiles
     {
         public MappingProfiles()
         {
-            CreateMap<UserProfile, UserProfileViewModel>().ReverseMap();
+            CreateMap<UserProfile, CreateUserProfileViewModel>().ReverseMap();
+            CreateMap<UserProfile, UserProfileViewModel>();
         }
     }
 }
