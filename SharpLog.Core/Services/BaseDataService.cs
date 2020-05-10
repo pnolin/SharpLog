@@ -1,10 +1,11 @@
 ﻿using SharpLog.Core.Interfaces;
+using SharpLog.Core.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SharpLog.Core.Services
 {
-    public abstract class BaseDataService<TModel> : IBaseDataService<TModel> where TModel : class
+    public abstract class BaseDataService<TModel> : IBaseDataService<TModel> where TModel : BaseModel
     {
         protected readonly IRepository<TModel> _repository;
 
@@ -15,22 +16,18 @@ namespace SharpLog.Core.Services
             _repository = repository;
         }
 
-        public Task<TModel> AddAsync(TModel model) =>
+        public IQueryable<TModel> FindAll() => _repository;
+
+        public Task<TModel> FindByIdAsync(string id) =>
+            _repository.FindByIdAsync(id);
+
+        public Task AddAsync(TModel model) =>
             _repository.AddAsync(model);
 
-        public void Delete(TModel model)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Delete(TModel model) =>
+            _repository.Delete(model);
 
-        public IQueryable<TModel> FindAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<TModel> Update(TModel model)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Task Update(TModel model) =>
+            _repository.Update(model);
     }
 }

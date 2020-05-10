@@ -1,15 +1,16 @@
-﻿using System;
+﻿using SharpLog.Core.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SharpLog.Core.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> : IQueryable<T> where T : BaseModel
     {
-        Task<T> FindAsync(Guid id);
+        Task<T> FindByIdAsync(string id);
 
-        Task<T> AddAsync(T model);
+        Task AddAsync(T model);
 
-        Task<T> Update(T model);
+        Task Update(T model);
 
         Task Delete(T model);
     }

@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharpLog.Core\SharpLog.Core.csproj" />
+    <ProjectReference Include="..\SharpLog.Infrastructure\SharpLog.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

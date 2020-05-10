@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharpLog.Framework.WebApi\SharpLog.Framework.WebAPI.csproj" />
+    <ProjectReference Include="..\SharpLog.MongoDB.Infrastructure\SharpLog.MongoDB.Infrastructure.csproj" />
     <ProjectReference Include="..\SharpLog.Users.Core\SharpLog.Users.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ using SharpLog.Core.Interfaces.HandlerPipeline;
 using SharpLog.Core.Models.Settings;
 using SharpLog.Core.Services;
 using SharpLog.Framework.WebAPI.Services.HandlerPipeline;
+using SharpLog.Infrastructure.Services;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -62,6 +63,7 @@ namespace SharpLog.Framework.WebAPI.Extensions
         public static void RegisterFrameworkWebAPIServices(this IServiceCollection services)
         {
             services.AddTransient<IRequestLoader, RequestLoader>();
+            services.AddScoped<IIDGeneratorService, IDGeneratorService>();
         }
 
         public static ISettingsService ReadApplicationSettings<T>(

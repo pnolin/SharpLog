@@ -1,4 +1,5 @@
-﻿using SharpLog.Users.Core.Interfaces;
+﻿using SharpLog.Core.Interfaces;
+using SharpLog.Users.Core.Interfaces;
 using SharpLog.Users.Core.Models;
 using System.Threading.Tasks;
 
@@ -6,9 +7,25 @@ namespace SharpLog.Users.Core.Services
 {
     public class UserProfileService : IUserProfileService
     {
-        public Task<UserProfile> CreateNewProfileAsync(UserProfile userProfile)
+        private readonly IUserProfileDataService _userProfileDataService;
+        private readonly IIDGeneratorService _idGeneratorService;
+
+        public UserProfileService(
+            IUserProfileDataService userProfileDataService,
+            IIDGeneratorService idGeneratorService
+        )
         {
-            return Task.FromResult(new UserProfile());
+            _userProfileDataService = userProfileDataService;
+            _idGeneratorService = idGeneratorService;
+        }
+
+        public async Task<UserProfile> CreateNewProfileAsync(UserProfile userProfile)
+        {
+            userProfile.Id = _idGeneratorService.GenerateId(userProfile.Id);
+
+            await _userProfileDataService.AddAsync(userProfile);
+
+            return userProfile;
         }
     }
 }
