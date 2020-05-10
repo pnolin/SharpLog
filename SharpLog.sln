@@ -31,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Security.Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{052D878C-3A81-41B1-92EA-01A2B6730E2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Users.WebAPI", "SharpLog.Users.WebAPI\SharpLog.Users.WebAPI.csproj", "{10912F7E-7676-4D8A-AA86-1914E7AA779B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Users.WebAPI", "SharpLog.Users.WebAPI\SharpLog.Users.WebAPI.csproj", "{10912F7E-7676-4D8A-AA86-1914E7AA779B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{9D9FD77B-4913-4241-95FE-939A7EC881DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Users.Core", "SharpLog.Users.Core\SharpLog.Users.Core.csproj", "{F87BD3D5-1A46-4579-85A1-E43F1DB8E3C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Users.Core", "SharpLog.Users.Core\SharpLog.Users.Core.csproj", "{F87BD3D5-1A46-4579-85A1-E43F1DB8E3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

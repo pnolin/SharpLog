@@ -25,5 +25,12 @@ namespace SharpLog.Framework.WebAPI.Services.HandlerPipeline
 
             return new PingExecutor<TResponse>(handler, _mapper);
         }
+
+        public IRequestExecutor<TData, TResponse> LoadRequest<T, TRequestHandler, TData, TResponse>(T data) where TRequestHandler : IRequestHandler<TData, TResponse>
+        {
+            var handler = _serviceProvider.GetService<TRequestHandler>();
+
+            return new RequestExecutor<T, TData, TResponse>(handler, data, _mapper);
+        }
     }
 }

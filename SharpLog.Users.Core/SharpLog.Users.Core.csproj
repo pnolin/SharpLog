@@ -5,4 +5,8 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpLog.Core\SharpLog.Core.csproj" />
+  </ItemGroup>
 </Project>
