@@ -1,6 +1,7 @@
 ﻿using SharpLog.Core.Interfaces;
 using SharpLog.Users.Core.Interfaces;
 using SharpLog.Users.Core.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SharpLog.Users.Core.Services
@@ -21,6 +22,14 @@ namespace SharpLog.Users.Core.Services
 
         public async Task<UserProfile> CreateNewProfileAsync(UserProfile userProfile)
         {
+            var allUsers = _userProfileDataService.FindAll();
+            var existingUser = allUsers.FirstOrDefault(user => user.EmailAddress == userProfile.EmailAddress);
+
+            if (existingUser != null)
+            {
+                return existingUser;
+            }
+
             userProfile.Id = _idGeneratorService.GenerateId(userProfile.Id);
 
             await _userProfileDataService.AddAsync(userProfile);
