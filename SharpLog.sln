@@ -41,7 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MongoDB", "MongoDB", "{79D3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.MongoDB.Infrastructure", "SharpLog.MongoDB.Infrastructure\SharpLog.MongoDB.Infrastructure.csproj", "{3CB00A63-2459-4E6F-AE04-81F4A5D1B8F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Infrastructure", "SharpLog.Infrastructure\SharpLog.Infrastructure.csproj", "{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Infrastructure", "SharpLog.Infrastructure\SharpLog.Infrastructure.csproj", "{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{CD66A065-6C9F-43DB-B074-BC2893EE7F51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Gateway.WebAPI", "SharpLog.Orchestrator.WebAPI\SharpLog.Gateway.WebAPI.csproj", "{720CD39D-279E-4D26-940A-AD6A57ADF8B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,10 @@ Global
 		{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720CD39D-279E-4D26-940A-AD6A57ADF8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720CD39D-279E-4D26-940A-AD6A57ADF8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720CD39D-279E-4D26-940A-AD6A57ADF8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720CD39D-279E-4D26-940A-AD6A57ADF8B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +119,8 @@ Global
 		{79D3390E-76F8-4637-86B3-2353C43A5EC1} = {96E5303B-F65A-4908-BBAD-E23CE22CA24C}
 		{3CB00A63-2459-4E6F-AE04-81F4A5D1B8F0} = {79D3390E-76F8-4637-86B3-2353C43A5EC1}
 		{5FC9FC50-51BE-4F73-A8ED-D08AD7AFBD75} = {96E5303B-F65A-4908-BBAD-E23CE22CA24C}
+		{CD66A065-6C9F-43DB-B074-BC2893EE7F51} = {7E55239B-76FC-47C2-B262-F646A915602E}
+		{720CD39D-279E-4D26-940A-AD6A57ADF8B4} = {CD66A065-6C9F-43DB-B074-BC2893EE7F51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7965C9E2-388F-40B0-B2DB-432AA135321D}
