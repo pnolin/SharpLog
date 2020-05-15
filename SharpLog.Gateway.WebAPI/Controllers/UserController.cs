@@ -19,7 +19,7 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
         {
             var loginUserResponse = await FowardRequest(HttpContext.Request, Clients.Security, "api/login");
 
-            if (Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+            if (loginUserResponse.StatusCode == HttpStatusCode.Unauthorized)
             {
                 return Unauthorized();
             }
@@ -31,7 +31,7 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
             var createUserResponse = await SendRequest(Clients.Users, HttpMethod.Post, "api/users", createUserData);
             var createUserResponseContent = await createUserResponse.Content.ReadAsStringAsync();
 
-            return Ok(createUserResponseContent);
+            return ActionResult(createUserResponse.StatusCode, createUserResponseContent);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -75,6 +76,16 @@ namespace SharpLog.Gateway.WebAPI.Controllers
         protected T DeserializeContent<T>(string jsonData)
         {
             return JsonSerializer.Deserialize<T>(jsonData, _serializerOptions);
+        }
+
+        protected ObjectResult ActionResult(HttpStatusCode statusCode, string content)
+        {
+            var objectResult = new ObjectResult(null);
+
+            objectResult.StatusCode = (int)statusCode;
+            objectResult.Value = content;
+
+            return objectResult;
         }
     }
 }
