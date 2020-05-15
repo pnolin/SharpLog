@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpLog.Framework.WebApi\SharpLog.Framework.WebAPI.csproj" />
+    <ProjectReference Include="..\SharpLog.MongoDB.Infrastructure\SharpLog.MongoDB.Infrastructure.csproj" />
+    <ProjectReference Include="..\SharpLog.Users.Core\SharpLog.Users.Core.csproj" />
+  </ItemGroup>
+</Project>

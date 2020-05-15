@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.45.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SharpLog.Core\SharpLog.Core.csproj" />
+    <ProjectReference Include="..\SharpLog.Security.Core\SharpLog.Security.Core.csproj" />
   </ItemGroup>
 </Project>

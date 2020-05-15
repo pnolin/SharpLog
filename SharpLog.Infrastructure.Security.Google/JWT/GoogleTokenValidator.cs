@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Auth;
 using Microsoft.IdentityModel.Tokens;
 using SharpLog.Core.Interfaces;
+using SharpLog.Security.Core.Models.Constants;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -30,10 +31,9 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
 
         public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
         {
-            validatedToken = null;
-            var x = new GoogleJsonWebSignature.ValidationSettings();
-            x.Audience = new List<string>() { _settingsService.GoogleApiCrendentials.ClientId };
-            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, x).Result;
+            var validationSettings = new GoogleJsonWebSignature.ValidationSettings();
+            validationSettings.Audience = new List<string>() { _settingsService.GoogleApiCrendentials.ClientId! };
+            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, validationSettings).Result;
 
             var claims = new List<Claim>
                 {
@@ -48,7 +48,8 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
 
             try
             {
-                var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, "google"));
+                validatedToken = null;
+                var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationTypes.Google));
                 return principle;
             }
             catch (Exception e)
