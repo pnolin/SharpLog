@@ -6,7 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SharpLog.Framework.WebApi\SharpLog.Framework.WebAPI.csproj" />
 		<ProjectReference Include="..\SharpLog.Security.Core\SharpLog.Security.Core.csproj" />
 	</ItemGroup>
 </Project>
