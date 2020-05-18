@@ -31,7 +31,7 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
             var createUserResponse = await SendRequest(Clients.Users, HttpMethod.Post, "api/users", createUserData);
             var createUserResponseContent = await createUserResponse.Content.ReadAsStringAsync();
 
-            return ActionResult(createUserResponse.StatusCode, createUserResponseContent);
+            return Created(createUserResponse.Headers.Location, DeserializeContent<object>(createUserResponseContent));
         }
     }
 }

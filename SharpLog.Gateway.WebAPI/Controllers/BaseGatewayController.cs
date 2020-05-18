@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -12,7 +13,7 @@ namespace SharpLog.Gateway.WebAPI.Controllers
     public class BaseGatewayController : ControllerBase
     {
         private IHttpClientFactory? _httpClientFactory;
-        private const string jsonContentType = "application/json";
+        private const string _jsonContentType = "application/json";
 
         private JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
         {
@@ -36,18 +37,25 @@ namespace SharpLog.Gateway.WebAPI.Controllers
                 }
             }
 
-            using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), url))
+            var newUrl = url;
+
+            foreach (var queryParam in request.Query)
+            {
+                newUrl = QueryHelpers.AddQueryString(newUrl, queryParam.Key, queryParam.Value);
+            }
+
+            using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), newUrl))
             {
                 newRequest.Content = new StringContent(requestContent, Encoding.UTF8, request.ContentType);
 
-                foreach (var x in request.Headers)
+                foreach (var header in request.Headers)
                 {
-                    if (newRequest.Headers.Contains(x.Key))
+                    if (newRequest.Headers.Contains(header.Key))
                     {
-                        newRequest.Headers.Remove(x.Key);
+                        newRequest.Headers.Remove(header.Key);
                     }
 
-                    newRequest.Headers.Add(x.Key, x.Value.ToString());
+                    newRequest.Headers.Add(header.Key, header.Value.ToString());
                 }
 
                 var response = await client.SendAsync(newRequest);
@@ -61,7 +69,7 @@ namespace SharpLog.Gateway.WebAPI.Controllers
         {
             using (var request = new HttpRequestMessage(method, url))
             {
-                request.Content = new StringContent(data, Encoding.UTF8, jsonContentType);
+                request.Content = new StringContent(data, Encoding.UTF8, _jsonContentType);
 
                 var client = HttpClientFactory.CreateClient(clientName);
 
@@ -76,16 +84,6 @@ namespace SharpLog.Gateway.WebAPI.Controllers
         protected T DeserializeContent<T>(string jsonData)
         {
             return JsonSerializer.Deserialize<T>(jsonData, _serializerOptions);
-        }
-
-        protected ObjectResult ActionResult(HttpStatusCode statusCode, string content)
-        {
-            var objectResult = new ObjectResult(null);
-
-            objectResult.StatusCode = (int)statusCode;
-            objectResult.Value = content;
-
-            return objectResult;
         }
     }
 }

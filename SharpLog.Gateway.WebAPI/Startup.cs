@@ -10,6 +10,8 @@ namespace SharpLog.Orchestrator.WebAPI
 {
     public class Startup
     {
+        private readonly string _myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,6 +23,14 @@ namespace SharpLog.Orchestrator.WebAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(_myAllowSpecificOrigins, builder =>
+                {
+                    builder.WithOrigins(Configuration["FrontEndOrigin"]);
+                });
+            });
+
             services.AddControllers();
             services.AddHttpClient(Clients.Security, client =>
             {
@@ -44,6 +54,8 @@ namespace SharpLog.Orchestrator.WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(_myAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {
