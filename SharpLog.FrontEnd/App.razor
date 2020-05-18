@@ -17,6 +17,9 @@
     {
         var isLogin = await _securityService.IsUserLoggedIn();
 
-        Console.WriteLine(isLogin);
+        if (isLogin)
+        {
+            _securityService.LoginUser();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using SharpLog.FrontEnd.Interfaces;
 using SharpLog.FrontEnd.Interfaces.DataServices;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services
@@ -30,9 +32,7 @@ namespace SharpLog.FrontEnd.Services
 
         public async void LoginUser()
         {
-            var accessToken = await _localStorageService.GetItemAsync<string>(idTokenStorageKey);
-
-            await _securityDataService.LoginUser(accessToken);
+            await _securityDataService.LoginUser();
         }
     }
 }

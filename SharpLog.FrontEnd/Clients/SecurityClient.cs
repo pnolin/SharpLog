@@ -1,24 +1,17 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
+﻿using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
+using System.Net.Http;
 
 namespace SharpLog.FrontEnd.Clients
 {
-    public class SecurityClient
+    public class SecurityClient : BaseClient
     {
-        private readonly HttpClient _client;
-
-        public SecurityClient(HttpClient client)
+        public SecurityClient(
+            HttpClient client,
+            ILocalStorageService localStorageService,
+            NavigationManager navigationManager
+        ) : base(client, localStorageService, navigationManager)
         {
-            _client = client;
-        }
-
-        public Task LoginUser(string url, string accessToken)
-        {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            return _client.GetFromJsonAsync<object>(url);
         }
     }
 }

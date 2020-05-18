@@ -33,9 +33,11 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
         {
             var validationSettings = new GoogleJsonWebSignature.ValidationSettings();
             validationSettings.Audience = new List<string>() { _settingsService.GoogleApiCrendentials.ClientId! };
-            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, validationSettings).Result;
+            try
+            {
+                var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, validationSettings).Result;
 
-            var claims = new List<Claim>
+                var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, payload.Name),
                     new Claim(ClaimTypes.Name, payload.Name),
@@ -46,8 +48,6 @@ namespace SharpLog.Infrastructure.Security.Google.JWT
                     new Claim(JwtRegisteredClaimNames.Iss, payload.Issuer),
                 };
 
-            try
-            {
                 validatedToken = null;
                 var principle = new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationTypes.Google));
                 return principle;

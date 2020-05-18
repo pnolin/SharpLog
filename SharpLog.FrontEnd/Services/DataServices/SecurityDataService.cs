@@ -15,11 +15,11 @@ namespace SharpLog.FrontEnd.Services.DataServices
             _securityClient = securityClient;
         }
 
-        public Task LoginUser(string accessToken)
+        public Task LoginUser()
         {
             var url = "login";
 
-            return _securityClient.LoginUser(url, accessToken);
+            return _securityClient.Get<object>(url);
         }
     }
 }

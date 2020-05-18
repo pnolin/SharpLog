@@ -7,7 +7,6 @@ using SharpLog.FrontEnd.Interfaces.DataServices;
 using SharpLog.FrontEnd.Services;
 using SharpLog.FrontEnd.Services.DataServices;
 using System;
-using System.Net.Http;
 
 namespace SharpLog.FrontEnd.Extensions
 {
@@ -19,9 +18,10 @@ namespace SharpLog.FrontEnd.Extensions
         {
             var apiRoot = builder.Configuration["SharpLogSettings:ApiRoot"];
 
-            services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            services.AddHttpClient<SecurityClient>(client =>
-                client.BaseAddress = new Uri($"{apiRoot}/security/"));
+            services.AddHttpClient<SecurityClient>((client) =>
+            {
+                client.BaseAddress = new Uri($"{apiRoot}/security/");
+            });
 
             services.AddBlazoredLocalStorage();
 
