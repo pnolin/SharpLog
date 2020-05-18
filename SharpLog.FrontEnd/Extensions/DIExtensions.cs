@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+﻿using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SharpLog.FrontEnd.Clients;
 using SharpLog.FrontEnd.Interfaces;
@@ -22,9 +23,11 @@ namespace SharpLog.FrontEnd.Extensions
             services.AddHttpClient<SecurityClient>(client =>
                 client.BaseAddress = new Uri($"{apiRoot}/security/"));
 
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton<ISecurityService, SecurityService>();
-            services.AddSingleton<ISecurityDataService, SecurityDataService>();
+            services.AddBlazoredLocalStorage();
+
+            services.AddScoped<ISettingsService, SettingsService>();
+            services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<ISecurityDataService, SecurityDataService>();
         }
     }
 }

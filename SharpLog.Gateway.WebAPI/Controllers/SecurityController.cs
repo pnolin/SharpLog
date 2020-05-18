@@ -10,10 +10,10 @@ namespace SharpLog.Gateway.WebAPI.Controllers
     public class SecurityController : BaseGatewayController
     {
         [HttpGet]
-        [Route("security/access-token")]
-        public async Task<IActionResult> GetAccessToken()
+        [Route("security/login")]
+        public async Task<IActionResult> Login()
         {
-            var getTokenResponse = await FowardRequest(HttpContext.Request, Clients.Security, "api/security/access-token");
+            var getTokenResponse = await FowardRequest(HttpContext.Request, Clients.Security, "api/login");
             var getTokenResponseContent = await getTokenResponse.Content.ReadAsStringAsync();
 
             return Ok(DeserializeContent<object>(getTokenResponseContent));

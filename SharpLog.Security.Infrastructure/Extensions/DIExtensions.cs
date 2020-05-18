@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SharpLog.Security.Core.Interfaces;
-using SharpLog.Security.Infrastructure.Google.Services;
 using SharpLog.Security.Infrastructure.Services;
 
 namespace SharpLog.Security.Infrastructure.Extensions
@@ -11,7 +10,6 @@ namespace SharpLog.Security.Infrastructure.Extensions
         {
             services.AddScoped<IUserClaimsService, UserClaimsService>();
             services.AddScoped<IUserIdentityService, UserIdentityService>();
-            services.AddScoped<IGoogleAuthenticationService, GoogleAuthenticationService>();
         }
     }
 }

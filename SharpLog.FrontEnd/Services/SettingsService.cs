@@ -16,8 +16,6 @@ namespace SharpLog.FrontEnd.Services
 
         public GoogleCredentialsSettings GoogleCredentials => _applicationSettings.GoogleCredentials;
 
-        public AuthenticationSettings AuthenticationSettings => _applicationSettings.AuthenticationSettings;
-
         public string ApiRoot => _applicationSettings.ApiRoot;
     }
 }

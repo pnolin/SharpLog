@@ -31,7 +31,6 @@ namespace SharpLog.Security.WebAPI.Extensions
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ISecurityService, SecurityService>();
-            services.AddScoped<IAuthenticationServiceFactory, AuthenticationServiceFactory>();
 
             services.RegisterAllTypesFromGeneric(typeof(IPingHandler<>), _assembliesToScanForDI, true);
             services.RegisterAllTypesFromGeneric(typeof(IRequestHandler<,>), _assembliesToScanForDI, true);

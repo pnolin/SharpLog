@@ -1,15 +1,11 @@
-﻿using SharpLog.FrontEnd.Models.Enums;
+﻿using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Interfaces
 {
     public interface ISecurityService
     {
-        void RedirectToLogin(AuthenticationProvider provider);
+        Task<bool> IsUserLoggedIn();
 
-        bool IsFromLogin();
-
-        void FetchAccessToken();
-
-        bool IsUserLoggedIn();
+        void LoginUser();
     }
 }

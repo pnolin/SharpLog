@@ -13,13 +13,10 @@
 </Router>
 
 @code{
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        var isFromLogin = _securityService.IsFromLogin();
+        var isLogin = await _securityService.IsUserLoggedIn();
 
-        if (isFromLogin)
-        {
-            _securityService.FetchAccessToken();
-        }
+        Console.WriteLine(isLogin);
     }
 }

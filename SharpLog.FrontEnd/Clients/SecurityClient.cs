@@ -1,5 +1,5 @@
-﻿using SharpLog.FrontEnd.Models.Security;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -14,11 +14,11 @@ namespace SharpLog.FrontEnd.Clients
             _client = client;
         }
 
-        public async Task<AccessTokens> GetAccessTokensAsync(string url)
+        public Task LoginUser(string url, string accessToken)
         {
-            AccessTokens accessTokens = await _client.GetFromJsonAsync<AccessTokens>(url);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            return accessTokens;
+            return _client.GetFromJsonAsync<object>(url);
         }
     }
 }

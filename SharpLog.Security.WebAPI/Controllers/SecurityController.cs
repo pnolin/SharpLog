@@ -14,20 +14,6 @@ namespace SharpLog.Security.WebAPI.Controllers
     public class SecurityController : BaseApiController
     {
         [HttpGet]
-        [Route("security/access-token")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAccessTokenAsync([FromQuery] GetAccessCodeViewModel getAccessCodeViewModel)
-        {
-            var result = await RequestLoader
-                .LoadRequest<GetAccessCodeViewModel, GetAccessTokenHandler, FetchAccessTokens, AccessTokens>(getAccessCodeViewModel)
-                .WithDataMappedTo<FetchAccessTokens>()
-                .WithResponseMappedTo<AccessTokensViewModel>()
-                .InvokeAsync();
-
-            return Ok(result);
-        }
-
-        [HttpGet]
         [Route("login/")]
         public async Task<IActionResult> Login()
         {

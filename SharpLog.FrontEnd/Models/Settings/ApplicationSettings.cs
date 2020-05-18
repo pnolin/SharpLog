@@ -3,7 +3,6 @@
     public class ApplicationSettings
     {
         public GoogleCredentialsSettings GoogleCredentials { get; set; } = new GoogleCredentialsSettings();
-        public AuthenticationSettings AuthenticationSettings { get; set; } = new AuthenticationSettings();
         public string ApiRoot { get; set; } = "";
     }
 }
