@@ -9,6 +9,8 @@ namespace SharpLog.Security.WebAPI.MappingProfiles
         public MappingProfiles()
         {
             CreateMap<UserIdentity, UserIdentityViewModel>();
+            CreateMap<GetAccessCodeViewModel, FetchAccessTokens>();
+            CreateMap<AccessTokens, AccessTokensViewModel>();
         }
     }
 }

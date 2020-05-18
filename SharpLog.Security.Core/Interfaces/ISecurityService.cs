@@ -5,6 +5,8 @@ namespace SharpLog.Security.Core.Interfaces
 {
     public interface ISecurityService
     {
+        Task<AccessTokens> GetAccessTokenAsync(FetchAccessTokens fetchInformation);
+
         Task<UserIdentity> GetLoggedInUser();
     }
 }
