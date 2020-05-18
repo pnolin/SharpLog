@@ -6,5 +6,6 @@ namespace SharpLog.FrontEnd.Interfaces
     {
         GoogleCredentialsSettings GoogleCredentials { get; }
         AuthenticationSettings AuthenticationSettings { get; }
+        string ApiRoot { get; }
     }
 }

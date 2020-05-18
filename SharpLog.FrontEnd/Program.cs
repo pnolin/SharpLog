@@ -9,6 +9,7 @@ namespace SharpLog.FrontEnd
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
             builder.RootComponents.Add<App>("app");
 
             builder.Services.SetupDI(builder);
