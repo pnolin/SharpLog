@@ -1,8 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using SharpLog.FrontEnd.Interfaces;
 using SharpLog.FrontEnd.Interfaces.DataServices;
-using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services

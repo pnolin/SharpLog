@@ -22,7 +22,7 @@
                 auth2.attachClickHandler(button, {}, (googleUser) => {
                     const idToken = googleUser.getAuthResponse().id_token;
                     window.localStorage.setItem('idToken', idToken);
-                    alert("voila");
+                    window.location.href = "https://localhost:44340/home";
                 });
             });
         }

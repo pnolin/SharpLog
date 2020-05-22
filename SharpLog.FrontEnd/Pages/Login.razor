@@ -3,11 +3,11 @@
 @using Interfaces
 @inject ISecurityService _securityService
 @inject ISettingsService _settingsService
+@inject NavigationManager _navigationManager
 @inject IJSRuntime JSRuntime
 
-<div>
-    <div>Please login using one the following provider</div>
-    <button id=@googleSignInButtonId class="btn btn-primary">Google</button>
+<div id="login-page">
+    <button id=@googleSignInButtonId class="btn btn-primary"><i class="fab fa-google"></i></button>
 </div>
 
 @code {
