@@ -20,7 +20,9 @@
 
         if (isLogin)
         {
-            _securityService.LoginUser();
+            await _securityService.LoginUser();
+            _navigationManager.NavigateTo("/home");
+
         }
         else
         {

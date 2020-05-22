@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using SharpLog.FrontEnd.Models;
+using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Interfaces.DataServices
 {
     public interface IUserDataService
     {
-        Task LoginUser();
+        Task<UserProfile?> LoginUser();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SharpLog.FrontEnd.Clients;
 using SharpLog.FrontEnd.Interfaces.DataServices;
+using SharpLog.FrontEnd.Models;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services.DataServices
@@ -15,11 +16,11 @@ namespace SharpLog.FrontEnd.Services.DataServices
             _securityClient = securityClient;
         }
 
-        public Task LoginUser()
+        public Task<UserProfile?> LoginUser()
         {
             var url = "login";
 
-            return _securityClient.Get<object>(url);
+            return _securityClient.Get<UserProfile>(url);
         }
     }
 }

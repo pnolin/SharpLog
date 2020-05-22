@@ -27,6 +27,8 @@ namespace SharpLog.FrontEnd.Extensions
 
             services.AddScoped<ISettingsService, SettingsService>();
             services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
+
             services.AddScoped<IUserDataService, UserDataService>();
         }
     }

@@ -10,14 +10,17 @@ namespace SharpLog.FrontEnd.Services
         private const string idTokenStorageKey = "idToken";
 
         private readonly IUserDataService _securityDataService;
+        private readonly IUserProfileService _userProfileService;
         private readonly ILocalStorageService _localStorageService;
 
         public SecurityService(
-            IUserDataService securityDataService,
+            IUserDataService userDataService,
+            IUserProfileService userProfileService,
             ILocalStorageService localStorageService
         )
         {
-            _securityDataService = securityDataService;
+            _securityDataService = userDataService;
+            _userProfileService = userProfileService;
             _localStorageService = localStorageService;
         }
 
@@ -28,9 +31,14 @@ namespace SharpLog.FrontEnd.Services
             return idToken != null;
         }
 
-        public async void LoginUser()
+        public async Task LoginUser()
         {
-            await _securityDataService.LoginUser();
+            var userProfile = await _securityDataService.LoginUser();
+
+            if (userProfile != null)
+            {
+                _userProfileService.SetCurrentUserProfile(userProfile);
+            }
         }
     }
 }

@@ -6,6 +6,6 @@ namespace SharpLog.FrontEnd.Interfaces
     {
         Task<bool> IsUserLoggedIn();
 
-        void LoginUser();
+        Task LoginUser();
     }
 }

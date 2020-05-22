@@ -11,7 +11,7 @@
     <link href="css/app.css" rel="stylesheet" />
     <script src="https://apis.google.com/js/api:client.js"></script>
     <script>
-        window.renderGoogleButton = (clientId, buttonId) => {
+        window.renderGoogleButton = (clientId, buttonId, applicationRoot) => {
             gapi.load('auth2', () => {
                 const auth2 = gapi.auth2.init({
                     client_id: `${clientId}.apps.googleusercontent.com`,
@@ -22,7 +22,7 @@
                 auth2.attachClickHandler(button, {}, (googleUser) => {
                     const idToken = googleUser.getAuthResponse().id_token;
                     window.localStorage.setItem('idToken', idToken);
-                    window.location.href = "https://localhost:44340/home";
+                    window.location.href = applicationRoot;
                 });
             });
         }

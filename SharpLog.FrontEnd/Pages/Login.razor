@@ -18,7 +18,10 @@
         if (firstRender)
         {
             await JSRuntime.InvokeVoidAsync(
-                "renderGoogleButton", _settingsService.GoogleCredentials.ClientId, googleSignInButtonId);
+                "renderGoogleButton",
+                _settingsService.GoogleCredentials.ClientId,
+                googleSignInButtonId,
+                _settingsService.AuthenticationSettings.RedirectUrl);
         }
     }
 }
