@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SharpLog.FrontEnd.Models;
+using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Interfaces
 {
@@ -6,6 +7,6 @@ namespace SharpLog.FrontEnd.Interfaces
     {
         Task<bool> IsUserLoggedIn();
 
-        Task LoginUser();
+        Task<UserProfile> LoginUser();
     }
 }

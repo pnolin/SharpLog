@@ -1,0 +1,23 @@
+﻿@page "/initial-user-configuration"
+
+@using Models.Forms
+
+<div id="initial-user-configuration-page">
+    <div>Welcome to SharpLog! Please select the username you would like to use.</div>
+    <EditForm Model="@_initialUserConfiguration" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <InputText id="username" @bind-Value="_initialUserConfiguration.Username"></InputText>
+
+        <button type="submit">Submit</button>
+    </EditForm>
+</div>
+
+@code{
+    private InitialUserConfigurationForm _initialUserConfiguration = new InitialUserConfigurationForm();
+
+    private void HandleValidSubmit()
+    {
+    }
+}

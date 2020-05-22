@@ -1,6 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using SharpLog.FrontEnd.Interfaces;
 using SharpLog.FrontEnd.Interfaces.DataServices;
+using SharpLog.FrontEnd.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services
@@ -31,14 +33,18 @@ namespace SharpLog.FrontEnd.Services
             return idToken != null;
         }
 
-        public async Task LoginUser()
+        public async Task<UserProfile> LoginUser()
         {
             var userProfile = await _securityDataService.LoginUser();
 
             if (userProfile != null)
             {
                 _userProfileService.SetCurrentUserProfile(userProfile);
+
+                return userProfile;
             }
+
+            throw new Exception("Something wrong happened when trying to login the user.");
         }
     }
 }
