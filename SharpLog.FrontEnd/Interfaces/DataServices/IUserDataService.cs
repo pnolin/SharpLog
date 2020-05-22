@@ -2,7 +2,7 @@
 
 namespace SharpLog.FrontEnd.Interfaces.DataServices
 {
-    public interface ISecurityDataService
+    public interface IUserDataService
     {
         Task LoginUser();
     }

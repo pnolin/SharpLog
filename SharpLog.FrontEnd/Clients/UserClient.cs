@@ -4,9 +4,9 @@ using System.Net.Http;
 
 namespace SharpLog.FrontEnd.Clients
 {
-    public class SecurityClient : BaseClient
+    public class UserClient : BaseClient
     {
-        public SecurityClient(
+        public UserClient(
             HttpClient client,
             ILocalStorageService localStorageService,
             NavigationManager navigationManager

@@ -9,11 +9,11 @@ namespace SharpLog.FrontEnd.Services
     {
         private const string idTokenStorageKey = "idToken";
 
-        private readonly ISecurityDataService _securityDataService;
+        private readonly IUserDataService _securityDataService;
         private readonly ILocalStorageService _localStorageService;
 
         public SecurityService(
-            ISecurityDataService securityDataService,
+            IUserDataService securityDataService,
             ILocalStorageService localStorageService
         )
         {

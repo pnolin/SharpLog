@@ -18,16 +18,16 @@ namespace SharpLog.FrontEnd.Extensions
         {
             var apiRoot = builder.Configuration["SharpLogSettings:ApiRoot"];
 
-            services.AddHttpClient<SecurityClient>((client) =>
+            services.AddHttpClient<UserClient>((client) =>
             {
-                client.BaseAddress = new Uri($"{apiRoot}/security/");
+                client.BaseAddress = new Uri($"{apiRoot}/user/");
             });
 
             services.AddBlazoredLocalStorage();
 
             services.AddScoped<ISettingsService, SettingsService>();
             services.AddScoped<ISecurityService, SecurityService>();
-            services.AddScoped<ISecurityDataService, SecurityDataService>();
+            services.AddScoped<IUserDataService, UserDataService>();
         }
     }
 }

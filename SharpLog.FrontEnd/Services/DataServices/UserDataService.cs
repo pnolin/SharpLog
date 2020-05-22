@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services.DataServices
 {
-    public class SecurityDataService : ISecurityDataService
+    public class UserDataService : IUserDataService
     {
-        private readonly SecurityClient _securityClient;
+        private readonly UserClient _securityClient;
 
-        public SecurityDataService(
-            SecurityClient securityClient
+        public UserDataService(
+            UserClient securityClient
         )
         {
             _securityClient = securityClient;
