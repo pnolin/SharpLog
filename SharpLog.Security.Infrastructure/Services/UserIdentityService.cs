@@ -14,7 +14,7 @@ namespace SharpLog.Security.Infrastructure.Services
             {
                 FirstName = claims.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.GivenName).Value,
                 LastName = claims.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.FamilyName).Value,
-                Email = claims.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Email).Value,
+                EmailAddress = claims.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Email).Value,
                 Identifier = claims.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value,
             };
         }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharpLog.Gateway.WebAPI.Controllers;
+using SharpLog.Gateway.WebAPI.Models;
 using SharpLog.Gateway.WebAPI.Models.Constants;
-using SharpLog.Security.Core.Models;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,9 +25,9 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
             }
 
             var loggedInUser = await loginUserResponse.Content.ReadAsStringAsync();
-            var userIdentity = DeserializeContent<UserIdentity>(loggedInUser);
+            var createUserViewModel = DeserializeContent<CreateUserProfileViewModel>(loggedInUser);
 
-            var createUserData = $@"{{""EmailAddress"": ""{userIdentity.Email}""}}";
+            var createUserData = SerializeObject(createUserViewModel);
             var createUserResponse = await SendRequest(Clients.Users, HttpMethod.Post, "api/users", createUserData);
             var createUserResponseContent = await createUserResponse.Content.ReadAsStringAsync();
 
