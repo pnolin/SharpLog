@@ -7,20 +7,27 @@ namespace SharpLog.FrontEnd.Services.DataServices
 {
     public class UserDataService : IUserDataService
     {
-        private readonly UserClient _securityClient;
+        private readonly UserClient _userClient;
 
         public UserDataService(
-            UserClient securityClient
+            UserClient userClient
         )
         {
-            _securityClient = securityClient;
+            _userClient = userClient;
         }
 
         public Task<UserProfile?> LoginUser()
         {
             var url = "login";
 
-            return _securityClient.Get<UserProfile>(url);
+            return _userClient.Get<UserProfile>(url);
+        }
+
+        public Task<string?> GetUsernameByUsername(string username)
+        {
+            var url = $"{username}/username";
+
+            return _userClient.Get<string>(url);
         }
     }
 }

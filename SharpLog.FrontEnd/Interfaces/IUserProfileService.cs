@@ -1,4 +1,5 @@
 ﻿using SharpLog.FrontEnd.Models;
+using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Interfaces
 {
@@ -7,5 +8,7 @@ namespace SharpLog.FrontEnd.Interfaces
         UserProfile GetCurrentUserProfile();
 
         void SetCurrentUserProfile(UserProfile userProfile);
+
+        Task<bool> IsUsernameTaken(string username);
     }
 }

@@ -1,23 +1,44 @@
 ﻿@page "/initial-user-configuration"
 
+@using Interfaces
 @using Models.Forms
+@inject IUserProfileService _userProfileService
 
 <div id="initial-user-configuration-page">
     <div>Welcome to SharpLog! Please select the username you would like to use.</div>
-    <EditForm Model="@_initialUserConfiguration" OnValidSubmit="HandleValidSubmit">
+    <EditForm OnValidSubmit="HandleValidSubmit" EditContext="@_editContext">
         <DataAnnotationsValidator />
-        <ValidationSummary />
 
         <InputText id="username" @bind-Value="_initialUserConfiguration.Username"></InputText>
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled="@_formInvalid">Submit</button>
     </EditForm>
 </div>
 
 @code{
     private InitialUserConfigurationForm _initialUserConfiguration = new InitialUserConfigurationForm();
+    private bool _formInvalid = true;
+    private EditContext _editContext;
+
+    protected override void OnInitialized()
+    {
+        _editContext = new EditContext(_initialUserConfiguration);
+        _editContext.OnFieldChanged += HandleFieldChanged;
+    }
+
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        _formInvalid = !_editContext.Validate();
+        StateHasChanged();
+    }
 
     private void HandleValidSubmit()
     {
+        var usernameTaken = _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
+    }
+
+    public void Dispose()
+    {
+        _editContext.OnFieldChanged -= HandleFieldChanged;
     }
 }
