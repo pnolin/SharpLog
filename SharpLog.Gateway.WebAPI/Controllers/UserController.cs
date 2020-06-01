@@ -33,5 +33,20 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
 
             return Created(createUserResponse.Headers.Location, DeserializeContent<object>(createUserResponseContent));
         }
+
+        [HttpGet]
+        [Route("user/{username}/username")]
+        public async Task<IActionResult> GetUsernameByUsername([FromRoute] string username)
+        {
+            var getUsernameResponse = await FowardRequest(HttpContext.Request, Clients.Users, $"api/user/{username}/username");
+
+            if (getUsernameResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                return NotFound();
+            }
+
+            var usernameResponse = await getUsernameResponse.Content.ReadAsStringAsync();
+            return Ok(usernameResponse);
+        }
     }
 }

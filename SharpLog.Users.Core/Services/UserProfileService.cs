@@ -1,4 +1,5 @@
-﻿using SharpLog.Core.Interfaces;
+﻿using SharpLog.Core.Exceptions;
+using SharpLog.Core.Interfaces;
 using SharpLog.Users.Core.Interfaces;
 using SharpLog.Users.Core.Models;
 using System.Linq;
@@ -35,6 +36,19 @@ namespace SharpLog.Users.Core.Services
             await _userProfileDataService.AddAsync(userProfile);
 
             return userProfile;
+        }
+
+        public Task<string> GetUsernameByUsername(string username)
+        {
+            var allUsers = _userProfileDataService.FindAll();
+            var user = allUsers.FirstOrDefault(user => user.Username.ToLower() == username.ToLower());
+
+            if (user == null)
+            {
+                throw new NotFoundException();
+            }
+
+            return Task.FromResult(user.Username);
         }
     }
 }

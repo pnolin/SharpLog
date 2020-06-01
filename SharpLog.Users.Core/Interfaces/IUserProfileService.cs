@@ -6,5 +6,7 @@ namespace SharpLog.Users.Core.Interfaces
     public interface IUserProfileService
     {
         Task<UserProfile> CreateNewProfileAsync(UserProfile userProfile);
+
+        Task<string> GetUsernameByUsername(string username);
     }
 }

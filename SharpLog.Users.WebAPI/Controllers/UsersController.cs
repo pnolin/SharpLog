@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SharpLog.Core.Exceptions;
 using SharpLog.Framework.WebAPI.Controllers;
 using SharpLog.Users.Core.Models;
 using SharpLog.Users.Core.Requests;
@@ -31,6 +32,24 @@ namespace SharpLog.Users.WebAPI.Controllers
         public async Task<IActionResult> GetUserByIdAsync([FromRoute] string userId)
         {
             throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        [Route("user/{username}/username")]
+        public async Task<IActionResult> GetUsernameByUsernameAsync([FromRoute] string username)
+        {
+            try
+            {
+                var foundUsername = await RequestLoader
+                    .LoadRequest<string, GetUsernameByUsernameRequestHandler, string, string>(username)
+                    .InvokeAsync();
+
+                return Ok(foundUsername);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }
