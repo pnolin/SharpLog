@@ -18,14 +18,14 @@ namespace SharpLog.FrontEnd.Services.DataServices
 
         public Task<UserProfile?> LoginUser()
         {
-            var url = "login";
+            var url = "user/login";
 
             return _userClient.Get<UserProfile>(url);
         }
 
         public Task<string?> GetUsernameByUsername(string username)
         {
-            var url = $"{username}/username";
+            var url = $"user/{username}/username";
 
             return _userClient.Get<string>(url);
         }

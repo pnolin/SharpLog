@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SharpLog.Orchestrator.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/user")]
     public class UserController : BaseGatewayController
     {
         [HttpGet]
