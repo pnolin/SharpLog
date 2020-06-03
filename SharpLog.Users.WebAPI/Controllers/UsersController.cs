@@ -42,6 +42,7 @@ namespace SharpLog.Users.WebAPI.Controllers
             {
                 var foundUsername = await RequestLoader
                     .LoadRequest<string, GetUsernameByUsernameRequestHandler, string, string>(username)
+                    .WithResponseMappedTo<GetUsernameByUsernameViewModel>()
                     .InvokeAsync();
 
                 return Ok(foundUsername);

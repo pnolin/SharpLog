@@ -45,8 +45,8 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
                 return NotFound();
             }
 
-            var usernameResponse = await getUsernameResponse.Content.ReadAsStringAsync();
-            return Ok(usernameResponse);
+            var usernameResponseContent = await getUsernameResponse.Content.ReadAsStringAsync();
+            return Ok(DeserializeContent<object>(usernameResponseContent));
         }
     }
 }

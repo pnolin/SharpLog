@@ -10,6 +10,9 @@ namespace SharpLog.Users.WebAPI.MappingProfiles
         {
             CreateMap<UserProfile, CreateUserProfileViewModel>().ReverseMap();
             CreateMap<UserProfile, UserProfileViewModel>();
+            CreateMap<string, GetUsernameByUsernameViewModel>()
+                .ForMember(viewModel => viewModel.Username,
+                    options => options.MapFrom(stringValue => stringValue));
         }
     }
 }

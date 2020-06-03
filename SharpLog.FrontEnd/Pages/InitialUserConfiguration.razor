@@ -12,13 +12,20 @@
         <InputText id="username" @bind-Value="_initialUserConfiguration.Username"></InputText>
 
         <button type="submit" disabled="@_formInvalid">Submit</button>
+
+        @if (_usernameTaken)
+        {
+            <div class="error-message">This username is already taken.</div>
+        }
     </EditForm>
 </div>
 
 @code{
     private InitialUserConfigurationForm _initialUserConfiguration = new InitialUserConfigurationForm();
-    private bool _formInvalid = true;
     private EditContext _editContext;
+
+    private bool _formInvalid = true;
+    private bool _usernameTaken = false;
 
     protected override void OnInitialized()
     {
@@ -32,9 +39,10 @@
         StateHasChanged();
     }
 
-    private void HandleValidSubmit()
+    private async void HandleValidSubmit()
     {
-        var usernameTaken = _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
+        _usernameTaken = await _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
+        StateHasChanged();
     }
 
     public void Dispose()

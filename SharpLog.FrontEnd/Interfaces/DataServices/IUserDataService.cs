@@ -1,4 +1,5 @@
 ﻿using SharpLog.FrontEnd.Models;
+using SharpLog.FrontEnd.Models.ViewModels;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Interfaces.DataServices
@@ -7,6 +8,6 @@ namespace SharpLog.FrontEnd.Interfaces.DataServices
     {
         Task<UserProfile?> LoginUser();
 
-        Task<string?> GetUsernameByUsername(string username);
+        Task<GetUsernameViewModel?> GetUsernameByUsername(string username);
     }
 }

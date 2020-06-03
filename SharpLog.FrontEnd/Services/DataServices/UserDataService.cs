@@ -1,6 +1,7 @@
 ﻿using SharpLog.FrontEnd.Clients;
 using SharpLog.FrontEnd.Interfaces.DataServices;
 using SharpLog.FrontEnd.Models;
+using SharpLog.FrontEnd.Models.ViewModels;
 using System.Threading.Tasks;
 
 namespace SharpLog.FrontEnd.Services.DataServices
@@ -23,11 +24,11 @@ namespace SharpLog.FrontEnd.Services.DataServices
             return _userClient.Get<UserProfile>(url);
         }
 
-        public Task<string?> GetUsernameByUsername(string username)
+        public Task<GetUsernameViewModel?> GetUsernameByUsername(string username)
         {
             var url = $"user/{username}/username";
 
-            return _userClient.Get<string>(url);
+            return _userClient.Get<GetUsernameViewModel>(url);
         }
     }
 }
