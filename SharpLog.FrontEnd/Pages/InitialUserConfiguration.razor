@@ -9,7 +9,7 @@
     <EditForm OnValidSubmit="HandleValidSubmit" EditContext="@_editContext">
         <DataAnnotationsValidator />
 
-        <InputText id="username" @bind-Value="_initialUserConfiguration.Username"></InputText>
+        <SharpInputText id="username" @bind-Value="_initialUserConfiguration.Username" class="@(_usernameTaken ? "invalid" : "")"></SharpInputText>
 
         <button type="submit" disabled="@_formInvalid">Submit</button>
 
@@ -35,6 +35,7 @@
 
     private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
     {
+        _usernameTaken = false;
         _formInvalid = !_editContext.Validate();
         StateHasChanged();
     }
@@ -42,6 +43,7 @@
     private async void HandleValidSubmit()
     {
         _usernameTaken = await _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
+
         StateHasChanged();
     }
 

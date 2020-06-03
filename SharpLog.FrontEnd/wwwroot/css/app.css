@@ -1,5 +1,7 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-@import "login.min.css";
+@import url("compiled/forms.min.css");
+@import url("compiled/login.min.css");
+@import url("compiled/initial-user-configuration.min.css");
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
