@@ -30,5 +30,12 @@ namespace SharpLog.FrontEnd.Services.DataServices
 
             return _userClient.Get<GetUsernameViewModel>(url);
         }
+
+        public Task<UserProfile?> ConfigureUserProfile(ConfigureUserProfileViewModel data)
+        {
+            var url = $"user/{data.Id}/configuration";
+
+            return _userClient.Put<ConfigureUserProfileViewModel, UserProfile>(url, data);
+        }
     }
 }

@@ -45,6 +45,11 @@
         _usernameTaken = await _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
 
         StateHasChanged();
+
+        if (!_usernameTaken)
+        {
+            await _userProfileService.ConfigureUserProfile(_initialUserConfiguration.Username);
+        }
     }
 
     public void Dispose()

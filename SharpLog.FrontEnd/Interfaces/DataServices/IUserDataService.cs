@@ -9,5 +9,7 @@ namespace SharpLog.FrontEnd.Interfaces.DataServices
         Task<UserProfile?> LoginUser();
 
         Task<GetUsernameViewModel?> GetUsernameByUsername(string username);
+
+        Task<UserProfile?> ConfigureUserProfile(ConfigureUserProfileViewModel data);
     }
 }

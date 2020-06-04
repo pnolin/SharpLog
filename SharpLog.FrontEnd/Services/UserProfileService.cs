@@ -1,6 +1,7 @@
 ﻿using SharpLog.FrontEnd.Interfaces;
 using SharpLog.FrontEnd.Interfaces.DataServices;
 using SharpLog.FrontEnd.Models;
+using SharpLog.FrontEnd.Models.ViewModels;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace SharpLog.FrontEnd.Services
     public class UserProfileService : IUserProfileService
     {
         private UserProfile? _currentUserProfile = null;
-        private IUserDataService _userDataService = null;
+        private IUserDataService _userDataService;
 
         public UserProfileService(IUserDataService userDataService)
         {
@@ -41,6 +42,31 @@ namespace SharpLog.FrontEnd.Services
             }
 
             return true;
+        }
+
+        public async Task ConfigureUserProfile(string username)
+        {
+            if (_currentUserProfile == null)
+            {
+                throw new InvalidOperationException("Can't configure the user profile if the current user profile is null.");
+            }
+
+            var viewModel = new ConfigureUserProfileViewModel()
+            {
+                Id = _currentUserProfile.Id,
+                Username = username
+            };
+
+            var newUserProfile = await _userDataService.ConfigureUserProfile(viewModel);
+
+            if (newUserProfile != null)
+            {
+                _currentUserProfile = newUserProfile;
+            }
+            else
+            {
+                throw new Exception("Something wrong happened when trying to configure the user.");
+            }
         }
     }
 }

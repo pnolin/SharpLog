@@ -10,5 +10,7 @@ namespace SharpLog.FrontEnd.Interfaces
         void SetCurrentUserProfile(UserProfile userProfile);
 
         Task<bool> IsUsernameTaken(string username);
+
+        Task ConfigureUserProfile(string username);
     }
 }
