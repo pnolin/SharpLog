@@ -52,5 +52,18 @@ namespace SharpLog.Users.WebAPI.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPut]
+        [Route("user/{id}/configuration")]
+        public async Task<IActionResult> ConfigureUserAsync([FromBody] ConfigureUserProfileViewModel userProfile)
+        {
+            var user = await RequestLoader
+                .LoadRequest<ConfigureUserProfileViewModel, ConfigureUserProfileRequestHandler, UserProfile, UserProfile>(userProfile)
+                .WithDataMappedTo<UserProfile>()
+                .WithResponseMappedTo<UserProfileViewModel>()
+                .InvokeAsync();
+
+            return Ok(user);
+        }
     }
 }

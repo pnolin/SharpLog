@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -45,16 +46,28 @@ namespace SharpLog.Gateway.WebAPI.Controllers
 
             using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), newUrl))
             {
-                newRequest.Content = new StringContent(requestContent, Encoding.UTF8, request.ContentType);
+                newRequest.Content = new StringContent(requestContent, Encoding.UTF8, ExtractContentType(request.ContentType));
 
                 foreach (var header in request.Headers)
                 {
-                    if (newRequest.Headers.Contains(header.Key))
+                    try
                     {
-                        newRequest.Headers.Remove(header.Key);
-                    }
+                        if (newRequest.Headers.Contains(header.Key))
+                        {
+                            newRequest.Headers.Remove(header.Key);
+                        }
 
-                    newRequest.Headers.Add(header.Key, header.Value.ToString());
+                        newRequest.Headers.Add(header.Key, header.Value.ToString());
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if (newRequest.Content.Headers.Contains(header.Key))
+                        {
+                            newRequest.Content.Headers.Remove(header.Key);
+                        }
+
+                        newRequest.Content.Headers.Add(header.Key, header.Value.ToString());
+                    }
                 }
 
                 var response = await client.SendAsync(newRequest);
@@ -89,5 +102,10 @@ namespace SharpLog.Gateway.WebAPI.Controllers
         {
             return JsonSerializer.Deserialize<T>(jsonData, _serializerOptions);
         }
+
+        private string? ExtractContentType(string contentType) =>
+            contentType != null
+                ? contentType.Split(';')[0]
+                : null;
     }
 }

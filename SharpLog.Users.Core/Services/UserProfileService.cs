@@ -50,5 +50,17 @@ namespace SharpLog.Users.Core.Services
 
             return Task.FromResult(user.Username);
         }
+
+        public async Task<UserProfile> ConfigureUserProfile(UserProfile userProfile)
+        {
+            var user = await _userProfileDataService.FindByIdAsync(userProfile.Id);
+
+            user.Username = userProfile.Username;
+            user.Configured = true;
+
+            await _userProfileDataService.Update(user);
+
+            return user;
+        }
     }
 }

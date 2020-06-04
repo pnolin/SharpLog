@@ -46,7 +46,19 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
             }
 
             var usernameResponseContent = await getUsernameResponse.Content.ReadAsStringAsync();
+
             return Ok(DeserializeContent<object>(usernameResponseContent));
+        }
+
+        [HttpPut]
+        [Route("user/{id}/configuration")]
+        public async Task<IActionResult> ConfigureUserAsync([FromRoute] string id)
+        {
+            var configureUserResponse = await FowardRequest(HttpContext.Request, Clients.Users, $"api/user/{id}/configuration");
+
+            var configureUserResponseContent = await configureUserResponse.Content.ReadAsStringAsync();
+
+            return Ok(DeserializeContent<object>(configureUserResponseContent));
         }
     }
 }

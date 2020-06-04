@@ -29,6 +29,8 @@ namespace SharpLog.Orchestrator.WebAPI
                 {
                     builder.WithOrigins(Configuration["FrontEndOrigin"]);
                     builder.WithHeaders("authorization");
+                    builder.WithHeaders("Content-Type");
+                    builder.AllowAnyMethod();
                 });
             });
 

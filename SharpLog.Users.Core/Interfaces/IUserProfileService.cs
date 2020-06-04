@@ -8,5 +8,7 @@ namespace SharpLog.Users.Core.Interfaces
         Task<UserProfile> CreateNewProfileAsync(UserProfile userProfile);
 
         Task<string> GetUsernameByUsername(string username);
+
+        Task<UserProfile> ConfigureUserProfile(UserProfile userProfile);
     }
 }
