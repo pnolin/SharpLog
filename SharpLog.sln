@@ -49,11 +49,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Gateway.WebAPI", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backlog", "Backlog", "{38485BAF-B259-48D4-81A5-0956E32A067B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Backlog.Core", "SharpLog.Backlog.Core\SharpLog.Backlog.Core.csproj", "{94093632-784B-4721-8215-421F6EB5F520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Backlog.Core", "SharpLog.Backlog.Core\SharpLog.Backlog.Core.csproj", "{94093632-784B-4721-8215-421F6EB5F520}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backlog", "Backlog", "{95A87EA0-A586-4287-A81B-3667C879DEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpLog.Backlog.WebAPI", "SharpLog.Backlog.WebAPI\SharpLog.Backlog.WebAPI.csproj", "{EBDD7A44-FCD2-4320-BAF3-C9FB754B0D59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpLog.Backlog.WebAPI", "SharpLog.Backlog.WebAPI\SharpLog.Backlog.WebAPI.csproj", "{EBDD7A44-FCD2-4320-BAF3-C9FB754B0D59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
