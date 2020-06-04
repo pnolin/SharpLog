@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/compiled/login.css",
+    "inputFile": "wwwroot/css/less/login.less"
+  },
+  {
+    "outputFile": "wwwroot/css/compiled/initial-user-configuration.css",
+    "inputFile": "wwwroot/css/less/initial-user-configuration.less"
+  },
+  {
+    "outputFile": "wwwroot/css/compiled/forms.css",
+    "inputFile": "wwwroot/css/less/forms.less"
+  }
+]

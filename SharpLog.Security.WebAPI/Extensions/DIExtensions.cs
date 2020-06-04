@@ -33,6 +33,7 @@ namespace SharpLog.Security.WebAPI.Extensions
             services.AddScoped<ISecurityService, SecurityService>();
 
             services.RegisterAllTypesFromGeneric(typeof(IPingHandler<>), _assembliesToScanForDI, true);
+            services.RegisterAllTypesFromGeneric(typeof(IRequestHandler<,>), _assembliesToScanForDI, true);
 
             services.RegisterSecurityInfrastructureService();
         }

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharpLog.Infrastructure.Security.Google\SharpLog.Security.Infrastructure.Google.csproj" />
     <ProjectReference Include="..\SharpLog.Security.Core\SharpLog.Security.Core.csproj" />
   </ItemGroup>
 </Project>

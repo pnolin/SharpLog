@@ -1,0 +1,27 @@
+﻿@page "/login"
+
+@using Interfaces
+@inject ISecurityService _securityService
+@inject ISettingsService _settingsService
+@inject NavigationManager _navigationManager
+@inject IJSRuntime JSRuntime
+
+<div id="login-page">
+    <button id=@googleSignInButtonId class="btn btn-primary"><i class="fab fa-google"></i></button>
+</div>
+
+@code {
+    private readonly string googleSignInButtonId = "google-sign-in-button";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync(
+                "renderGoogleButton",
+                _settingsService.GoogleCredentials.ClientId,
+                googleSignInButtonId,
+                _settingsService.AuthenticationSettings.RedirectUrl);
+        }
+    }
+}

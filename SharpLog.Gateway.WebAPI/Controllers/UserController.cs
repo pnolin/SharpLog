@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharpLog.Gateway.WebAPI.Controllers;
+using SharpLog.Gateway.WebAPI.Models;
 using SharpLog.Gateway.WebAPI.Models.Constants;
-using SharpLog.Security.Core.Models;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SharpLog.Orchestrator.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/user")]
     public class UserController : BaseGatewayController
     {
         [HttpGet]
@@ -25,13 +25,40 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
             }
 
             var loggedInUser = await loginUserResponse.Content.ReadAsStringAsync();
-            var userIdentity = DeserializeContent<UserIdentity>(loggedInUser);
+            var createUserViewModel = DeserializeContent<CreateUserProfileViewModel>(loggedInUser);
 
-            var createUserData = $@"{{""EmailAddress"": ""{userIdentity.Email}""}}";
+            var createUserData = SerializeObject(createUserViewModel);
             var createUserResponse = await SendRequest(Clients.Users, HttpMethod.Post, "api/users", createUserData);
             var createUserResponseContent = await createUserResponse.Content.ReadAsStringAsync();
 
-            return ActionResult(createUserResponse.StatusCode, createUserResponseContent);
+            return Created(createUserResponse.Headers.Location, DeserializeContent<object>(createUserResponseContent));
+        }
+
+        [HttpGet]
+        [Route("user/{username}/username")]
+        public async Task<IActionResult> GetUsernameByUsername([FromRoute] string username)
+        {
+            var getUsernameResponse = await FowardRequest(HttpContext.Request, Clients.Users, $"api/user/{username}/username");
+
+            if (getUsernameResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                return NotFound();
+            }
+
+            var usernameResponseContent = await getUsernameResponse.Content.ReadAsStringAsync();
+
+            return Ok(DeserializeContent<object>(usernameResponseContent));
+        }
+
+        [HttpPut]
+        [Route("user/{id}/configuration")]
+        public async Task<IActionResult> ConfigureUserAsync([FromRoute] string id)
+        {
+            var configureUserResponse = await FowardRequest(HttpContext.Request, Clients.Users, $"api/user/{id}/configuration");
+
+            var configureUserResponseContent = await configureUserResponse.Content.ReadAsStringAsync();
+
+            return Ok(DeserializeContent<object>(configureUserResponseContent));
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -12,7 +13,7 @@ namespace SharpLog.Gateway.WebAPI.Controllers
     public class BaseGatewayController : ControllerBase
     {
         private IHttpClientFactory? _httpClientFactory;
-        private const string jsonContentType = "application/json";
+        private const string _jsonContentType = "application/json";
 
         private JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
         {
@@ -36,18 +37,37 @@ namespace SharpLog.Gateway.WebAPI.Controllers
                 }
             }
 
-            using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), url))
+            var newUrl = url;
+
+            foreach (var queryParam in request.Query)
             {
-                newRequest.Content = new StringContent(requestContent, Encoding.UTF8, request.ContentType);
+                newUrl = QueryHelpers.AddQueryString(newUrl, queryParam.Key, queryParam.Value);
+            }
 
-                foreach (var x in request.Headers)
+            using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), newUrl))
+            {
+                newRequest.Content = new StringContent(requestContent, Encoding.UTF8, ExtractContentType(request.ContentType));
+
+                foreach (var header in request.Headers)
                 {
-                    if (newRequest.Headers.Contains(x.Key))
+                    try
                     {
-                        newRequest.Headers.Remove(x.Key);
-                    }
+                        if (newRequest.Headers.Contains(header.Key))
+                        {
+                            newRequest.Headers.Remove(header.Key);
+                        }
 
-                    newRequest.Headers.Add(x.Key, x.Value.ToString());
+                        newRequest.Headers.Add(header.Key, header.Value.ToString());
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if (newRequest.Content.Headers.Contains(header.Key))
+                        {
+                            newRequest.Content.Headers.Remove(header.Key);
+                        }
+
+                        newRequest.Content.Headers.Add(header.Key, header.Value.ToString());
+                    }
                 }
 
                 var response = await client.SendAsync(newRequest);
@@ -61,7 +81,7 @@ namespace SharpLog.Gateway.WebAPI.Controllers
         {
             using (var request = new HttpRequestMessage(method, url))
             {
-                request.Content = new StringContent(data, Encoding.UTF8, jsonContentType);
+                request.Content = new StringContent(data, Encoding.UTF8, _jsonContentType);
 
                 var client = HttpClientFactory.CreateClient(clientName);
 
@@ -73,19 +93,19 @@ namespace SharpLog.Gateway.WebAPI.Controllers
             }
         }
 
+        protected string SerializeObject<T>(T value)
+        {
+            return JsonSerializer.Serialize<T>(value);
+        }
+
         protected T DeserializeContent<T>(string jsonData)
         {
             return JsonSerializer.Deserialize<T>(jsonData, _serializerOptions);
         }
 
-        protected ObjectResult ActionResult(HttpStatusCode statusCode, string content)
-        {
-            var objectResult = new ObjectResult(null);
-
-            objectResult.StatusCode = (int)statusCode;
-            objectResult.Value = content;
-
-            return objectResult;
-        }
+        private string? ExtractContentType(string contentType) =>
+            contentType != null
+                ? contentType.Split(';')[0]
+                : null;
     }
 }

@@ -1,0 +1,59 @@
+﻿@page "/initial-user-configuration"
+
+@using Interfaces
+@using Models.Forms
+@inject IUserProfileService _userProfileService
+
+<div id="initial-user-configuration-page">
+    <div>Welcome to SharpLog! Please select the username you would like to use.</div>
+    <EditForm OnValidSubmit="HandleValidSubmit" EditContext="@_editContext">
+        <DataAnnotationsValidator />
+
+        <SharpInputText id="username" @bind-Value="_initialUserConfiguration.Username" class="@(_usernameTaken ? "invalid" : "")"></SharpInputText>
+
+        <button type="submit" disabled="@_formInvalid">Submit</button>
+
+        @if (_usernameTaken)
+        {
+            <div class="error-message">This username is already taken.</div>
+        }
+    </EditForm>
+</div>
+
+@code{
+    private InitialUserConfigurationForm _initialUserConfiguration = new InitialUserConfigurationForm();
+    private EditContext _editContext;
+
+    private bool _formInvalid = true;
+    private bool _usernameTaken = false;
+
+    protected override void OnInitialized()
+    {
+        _editContext = new EditContext(_initialUserConfiguration);
+        _editContext.OnFieldChanged += HandleFieldChanged;
+    }
+
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        _usernameTaken = false;
+        _formInvalid = !_editContext.Validate();
+        StateHasChanged();
+    }
+
+    private async void HandleValidSubmit()
+    {
+        _usernameTaken = await _userProfileService.IsUsernameTaken(_initialUserConfiguration.Username);
+
+        StateHasChanged();
+
+        if (!_usernameTaken)
+        {
+            await _userProfileService.ConfigureUserProfile(_initialUserConfiguration.Username);
+        }
+    }
+
+    public void Dispose()
+    {
+        _editContext.OnFieldChanged -= HandleFieldChanged;
+    }
+}

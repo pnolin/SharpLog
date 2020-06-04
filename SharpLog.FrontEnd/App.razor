@@ -1,0 +1,40 @@
+@using Interfaces
+@inject ISecurityService _securityService
+@inject NavigationManager _navigationManager
+
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code{
+    protected async override Task OnInitializedAsync()
+    {
+        var isLogin = await _securityService.IsUserLoggedIn();
+
+        if (isLogin)
+        {
+            var userProfile = await _securityService.LoginUser();
+
+            if (userProfile.Configured)
+            {
+                _navigationManager.NavigateTo("/home");
+            }
+            else
+            {
+                _navigationManager.NavigateTo("/initial-user-configuration");
+            }
+
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/login");
+        }
+    }
+}
