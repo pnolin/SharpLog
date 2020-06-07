@@ -44,6 +44,11 @@ namespace SharpLog.Orchestrator.WebAPI
             {
                 client.BaseAddress = new Uri(Configuration["Routes:Users"]);
             });
+
+            services.AddHttpClient(Clients.Backlog, client =>
+            {
+                client.BaseAddress = new Uri(Configuration["Routes:Backlog"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

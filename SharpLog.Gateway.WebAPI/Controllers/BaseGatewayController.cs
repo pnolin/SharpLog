@@ -103,6 +103,21 @@ namespace SharpLog.Gateway.WebAPI.Controllers
             return JsonSerializer.Deserialize<T>(jsonData, _serializerOptions);
         }
 
+        protected async Task<T> ReadRequestContentAsAsync<T>(HttpRequest request)
+        {
+            var requestContent = "";
+
+            using (var bodyStream = request.Body)
+            {
+                using (var streamReader = new StreamReader(bodyStream, Encoding.UTF8))
+                {
+                    requestContent = await streamReader.ReadToEndAsync();
+                }
+            }
+
+            return DeserializeContent<T>(requestContent);
+        }
+
         private string? ExtractContentType(string contentType) =>
             contentType != null
                 ? contentType.Split(';')[0]

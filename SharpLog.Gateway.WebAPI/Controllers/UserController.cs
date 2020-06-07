@@ -54,11 +54,25 @@ namespace SharpLog.Orchestrator.WebAPI.Controllers
         [Route("user/{id}/configuration")]
         public async Task<IActionResult> ConfigureUserAsync([FromRoute] string id)
         {
-            var configureUserResponse = await FowardRequest(HttpContext.Request, Clients.Users, $"api/user/{id}/configuration");
+            var createBacklogUserResponse = await SendRequest(Clients.Backlog, HttpMethod.Post, "api/backlogs", string.Empty);
 
-            var configureUserResponseContent = await configureUserResponse.Content.ReadAsStringAsync();
+            if (createBacklogUserResponse.StatusCode == HttpStatusCode.Created)
+            {
+                var backlogAsString = await createBacklogUserResponse.Content.ReadAsStringAsync();
+                var backlogViewModel = DeserializeContent<BacklogViewModel>(backlogAsString);
 
-            return Ok(DeserializeContent<object>(configureUserResponseContent));
+                var userProfileViewModel = await ReadRequestContentAsAsync<ConfigureUserProfileViewModel>(HttpContext.Request);
+                userProfileViewModel.BacklogId = backlogViewModel.Id;
+
+                var configureUserProfileData = SerializeObject(userProfileViewModel);
+
+                var configureUserResponse = await SendRequest(Clients.Users, HttpMethod.Put, $"api/user/{id}/configuration", configureUserProfileData);
+                var configureUserResponseContent = await configureUserResponse.Content.ReadAsStringAsync();
+
+                return Ok(DeserializeContent<object>(configureUserResponseContent));
+            }
+
+            return StatusCode(500, createBacklogUserResponse.Content);
         }
     }
 }
