@@ -56,6 +56,7 @@ namespace SharpLog.Users.Core.Services
             var user = await _userProfileDataService.FindByIdAsync(userProfile.Id);
 
             user.Username = userProfile.Username;
+            user.BacklogId = userProfile.BacklogId;
             user.Configured = true;
 
             await _userProfileDataService.Update(user);

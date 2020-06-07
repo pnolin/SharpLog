@@ -3,6 +3,7 @@
 @using Interfaces
 @using Models.Forms
 @inject IUserProfileService _userProfileService
+@inject NavigationManager _navigationManager
 
 <div id="initial-user-configuration-page">
     <div>Welcome to SharpLog! Please select the username you would like to use.</div>
@@ -49,6 +50,7 @@
         if (!_usernameTaken)
         {
             await _userProfileService.ConfigureUserProfile(_initialUserConfiguration.Username);
+            _navigationManager.NavigateTo("/home");
         }
     }
 

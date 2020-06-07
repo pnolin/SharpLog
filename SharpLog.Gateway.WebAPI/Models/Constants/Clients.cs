@@ -4,5 +4,6 @@
     {
         public const string Security = "Security";
         public const string Users = "Users";
+        public const string Backlog = "Backlog";
     }
 }
