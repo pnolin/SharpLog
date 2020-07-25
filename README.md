@@ -1,4 +1,4 @@
-# SharLog
+# SharpLog
 
 SharpLog is a video game backog application.
 
