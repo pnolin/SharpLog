@@ -23,12 +23,19 @@ namespace SharpLog.FrontEnd.Extensions
                 client.BaseAddress = new Uri($"{apiRoot}/user/");
             });
 
+            services.AddHttpClient<GameClient>((client) =>
+            {
+                client.BaseAddress = new Uri($"{apiRoot}/game/");
+            });
+
             services.AddBlazoredLocalStorage();
 
+            services.AddScoped<IGameService, GameService>();
             services.AddScoped<ISettingsService, SettingsService>();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
 
+            services.AddScoped<IGameDataService, GameDataService>();
             services.AddScoped<IUserDataService, UserDataService>();
         }
     }

@@ -1,0 +1,37 @@
+﻿@page "/backlog/add-game"
+
+@using Models.DTOs
+@using Models.Forms
+@using Interfaces
+@inject IGameService _gameService;
+
+<div id="add-game-page">
+    <BlazoredTypeahead SearchMethod="@SearchGames"
+                       @bind-Value="@_searchGameForm.SearchedGame"
+                       Debounce="500"
+                       MinimumLength="3">
+        <SelectedTemplate>
+            @GetSearchedGameDisplay(@context)
+        </SelectedTemplate>
+        <ResultTemplate>
+            @GetSearchedGameDisplay(@context)
+        </ResultTemplate>
+        <NotFoundTemplate>
+            Sorry, there weren't any search results.
+        </NotFoundTemplate>
+    </BlazoredTypeahead>
+</div>
+
+@code {
+    private SearchGameForm _searchGameForm = new SearchGameForm();
+
+    private async Task<IEnumerable<SearchedGame>> SearchGames(string searchText)
+    {
+        var games = await _gameService.SearchGame(searchText);
+
+        return games;
+    }
+
+    private string GetSearchedGameDisplay(SearchedGame searchedGame) =>
+        $"{searchedGame.Name} {(searchedGame.ReleaseYear.HasValue ? $"({searchedGame.ReleaseYear.Value.ToString()})" : string.Empty)}";
+}
