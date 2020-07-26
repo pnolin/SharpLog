@@ -8,7 +8,9 @@ namespace SharpLog.IGDB.WebAPI.MappingProfiles
     {
         public MappingProfiles()
         {
-            CreateMap<IGDBGame, SearchedGameViewModel>();
+            CreateMap<IGDBGame, SearchedGameViewModel>()
+                .ForMember(viewModel => viewModel.ReleaseYear,
+                    options => options.MapFrom(game => game.FirstReleaseDate.HasValue ? game.FirstReleaseDate.Value.Year : (int?)null));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SharpLog.IGDB.Infrastructure.Services
         {
             var igdb = IGDBClient.Create(_settingsService.IGDBApiKey);
 
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields id,name,platforms; search \"{searchText}\";");
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields id,name,platforms,first_release_date; search \"{searchText}\";");
 
             var mappedGames = games.Select(game =>
             {
@@ -30,7 +30,8 @@ namespace SharpLog.IGDB.Infrastructure.Services
                 {
                     Id = game.Id.HasValue ? game.Id.Value.ToString() : "",
                     Name = game.Name,
-                    Platforms = game.Platforms != null ? game.Platforms.Ids.Select(id => id.ToString()) : new List<string>()
+                    Platforms = game.Platforms != null ? game.Platforms.Ids.Select(id => id.ToString()) : new List<string>(),
+                    FirstReleaseDate = game.FirstReleaseDate
                 };
             });
 
