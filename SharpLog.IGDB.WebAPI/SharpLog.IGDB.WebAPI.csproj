@@ -1,18 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<LangVersion>8.0</LangVersion>
-	<Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>ec8ec64b-c5a1-4e21-9fa6-4954a14c82be</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SharpLog.Framework.WebApi\SharpLog.Framework.WebAPI.csproj" />
     <ProjectReference Include="..\SharpLog.IGDB.Core\SharpLog.IGDB.Core.csproj" />
+    <ProjectReference Include="..\SharpLog.IGDB.Infrastructure\SharpLog.IGDB.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

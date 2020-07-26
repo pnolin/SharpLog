@@ -1,7 +1,11 @@
-﻿namespace SharpLog.IGDB.Core.Models
+﻿using SharpLog.Core.Models;
+using System.Collections.Generic;
+
+namespace SharpLog.IGDB.Core.Models
 {
-    public class IGDBGame
+    public class IGDBGame : BaseModel
     {
-        public string name { get; set; } = "";
+        public string Name { get; set; } = "";
+        public IEnumerable<string> Platforms { get; set; } = new List<string>();
     }
 }

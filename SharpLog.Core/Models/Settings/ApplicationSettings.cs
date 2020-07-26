@@ -4,5 +4,6 @@
     {
         public GoogleApiCredentialsSettings GoogleApiCrendentials { get; set; } = new GoogleApiCredentialsSettings();
         public MongoDBSettings MongoDBSettings { get; set; } = new MongoDBSettings();
+        public string IGDBApiKey { get; set; } = "";
     }
 }

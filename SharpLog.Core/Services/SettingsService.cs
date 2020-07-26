@@ -15,5 +15,7 @@ namespace SharpLog.Core.Services
         public GoogleApiCredentialsSettings GoogleApiCrendentials => applicationSettings.GoogleApiCrendentials;
 
         public MongoDBSettings MongoDBSettings => applicationSettings.MongoDBSettings;
+
+        public string IGDBApiKey => applicationSettings.IGDBApiKey;
     }
 }

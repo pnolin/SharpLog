@@ -5,6 +5,7 @@ using SharpLog.Framework.WebAPI.Extensions;
 using SharpLog.IGDB.Core.Interfaces;
 using SharpLog.IGDB.Core.Requests;
 using SharpLog.IGDB.Core.Services;
+using SharpLog.IGDB.Infrastructure.Extensions;
 using SharpLog.IGDB.WebAPI.Models.Settings;
 using System.Reflection;
 
@@ -31,6 +32,8 @@ namespace SharpLog.IGDB.WebAPI.Extensions
             services.RegisterAllTypesFromGeneric(typeof(IRequestHandler<,>), _assembliesToScanForDI, true);
 
             services.RegisterFrameworkWebAPIServices();
+
+            services.RegisterIGDBInfrastructureServices();
         }
     }
 }
