@@ -1,11 +1,11 @@
-﻿@page "/backlog/add-game"
+﻿@page "/backlog/search-game"
 
 @using Models.DTOs
 @using Models.Forms
 @using Interfaces
 @inject IGameService _gameService;
 
-<div id="add-game-page">
+<div>
     <BlazoredTypeahead SearchMethod="@SearchGames"
                        @bind-Value="@_searchGameForm.SearchedGame"
                        Debounce="500"
