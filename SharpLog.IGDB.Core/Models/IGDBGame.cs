@@ -7,7 +7,7 @@ namespace SharpLog.IGDB.Core.Models
     public class IGDBGame : BaseModel
     {
         public string Name { get; set; } = "";
-        public IEnumerable<string> Platforms { get; set; } = new List<string>();
+        public IEnumerable<IGDBPlatform> Platforms { get; set; } = new List<IGDBPlatform>();
         public DateTimeOffset? FirstReleaseDate { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SharpLog.IGDB.Core.Interfaces;
 using SharpLog.IGDB.Core.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SharpLog.IGDB.Core.Services
@@ -14,7 +15,20 @@ namespace SharpLog.IGDB.Core.Services
             _igdbApiService = igdbApiService;
         }
 
-        public Task<IEnumerable<IGDBGame>> SearchGames(string searchText)
-            => _igdbApiService.SearchGames(searchText);
+        public async Task<IEnumerable<IGDBGame>> SearchGames(string searchText)
+        {
+            var games = await _igdbApiService.SearchGames(searchText);
+
+            games = games.Select(game =>
+            {
+                game.Platforms = game.Platforms
+                    .Select(async platform => await _igdbApiService.GetPlatformDetails(platform.Id))
+                    .Select(task => task.Result);
+
+                return game;
+            });
+
+            return games;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using IGDB.Models;
+﻿using AutoMapper;
+using IGDB;
+using IGDB.Models;
 using SharpLog.Core.Interfaces;
 using SharpLog.IGDB.Core.Interfaces;
 using SharpLog.IGDB.Core.Models;
@@ -11,31 +13,33 @@ namespace SharpLog.IGDB.Infrastructure.Services
 {
     public class IGDBApiService : IIGDBApiService
     {
+        private readonly IGDBApi _igdb;
+        private readonly IMapper _mapper;
         private readonly ISettingsService _settingsService;
 
-        public IGDBApiService(ISettingsService settingsService)
+        public IGDBApiService(
+            IMapper mapper,
+            ISettingsService settingsService)
         {
+            _mapper = mapper;
             _settingsService = settingsService;
+            _igdb = IGDBClient.Create(_settingsService.IGDBApiKey);
         }
 
         public async Task<IEnumerable<IGDBGame>> SearchGames(string searchText)
         {
-            var igdb = IGDBClient.Create(_settingsService.IGDBApiKey);
+            var games = await _igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields id,name,platforms,first_release_date; search \"{searchText}\";");
 
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields id,name,platforms,first_release_date; search \"{searchText}\";");
+            return _mapper.Map<IEnumerable<IGDBGame>>(games);
+        }
 
-            var mappedGames = games.Select(game =>
-            {
-                return new IGDBGame()
-                {
-                    Id = game.Id.HasValue ? game.Id.Value.ToString() : "",
-                    Name = game.Name,
-                    Platforms = game.Platforms != null ? game.Platforms.Ids.Select(id => id.ToString()) : new List<string>(),
-                    FirstReleaseDate = game.FirstReleaseDate
-                };
-            });
+        public async Task<IGDBPlatform> GetPlatformDetails(string id)
+        {
+            var longId = long.Parse(id);
+            var platforms = await _igdb.QueryAsync<Platform>(IGDBClient.Endpoints.Platforms, query: $"fields *; where id = {longId};");
+            var platform = platforms.First();
 
-            return mappedGames;
+            return _mapper.Map<IGDBPlatform>(platform);
         }
     }
 }
