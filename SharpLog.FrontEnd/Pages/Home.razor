@@ -1,0 +1,14 @@
+﻿@page "/home"
+
+@inject NavigationManager _navigationManager
+
+<div id="home-page">
+    <button class="btn btn-primary" @onclick="HandleAddGameClick">Add Game</button>
+</div>
+
+@code{
+    private void HandleAddGameClick()
+    {
+        _navigationManager.NavigateTo("/backlog/search-game");
+    }
+}

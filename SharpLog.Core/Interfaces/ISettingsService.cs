@@ -7,5 +7,7 @@ namespace SharpLog.Core.Interfaces
         GoogleApiCredentialsSettings GoogleApiCrendentials { get; }
 
         MongoDBSettings MongoDBSettings { get; }
+
+        string IGDBApiKey { get; }
     }
 }
