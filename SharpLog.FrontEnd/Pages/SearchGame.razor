@@ -5,21 +5,25 @@
 @using Interfaces
 @inject IGameService _gameService;
 
-<div>
-    <BlazoredTypeahead SearchMethod="@SearchGames"
-                       @bind-Value="@_searchGameForm.SearchedGame"
-                       Debounce="500"
-                       MinimumLength="3">
-        <SelectedTemplate>
-            @GetSearchedGameDisplay(@context, false)
-        </SelectedTemplate>
-        <ResultTemplate>
-            @GetSearchedGameDisplay(@context, true)
-        </ResultTemplate>
-        <NotFoundTemplate>
-            Sorry, there weren't any search results.
-        </NotFoundTemplate>
-    </BlazoredTypeahead>
+<div id="search-game-page">
+    <div id="search-game-wrapper">
+        <BlazoredTypeahead id="search-game-input"
+                            SearchMethod="@SearchGames"
+                            @bind-Value="@_searchGameForm.SearchedGame"
+                            Debounce="500"
+                            MinimumLength="3">
+            <SelectedTemplate>
+                @GetSearchedGameDisplay(@context, false)
+            </SelectedTemplate>
+            <ResultTemplate>
+                @GetSearchedGameDisplay(@context, true)
+            </ResultTemplate>
+            <NotFoundTemplate>
+                Sorry, there weren't any search results.
+            </NotFoundTemplate>
+        </BlazoredTypeahead>
+        <button class="btn btn-primary">Add</button>
+    </div>
 </div>
 
 @code {

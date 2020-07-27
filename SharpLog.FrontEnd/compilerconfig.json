@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/css/compiled/forms.css",
     "inputFile": "wwwroot/css/less/forms.less"
+  },
+  {
+    "outputFile": "wwwroot/css/compiled/search-game.css",
+    "inputFile": "wwwroot/css/less/search-game.less"
   }
 ]
